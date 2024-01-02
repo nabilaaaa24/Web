@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UAP WEB</title>
+  </head>
+  <body>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Kode</th>
+          <th>Barang</th>
+          <th>Harga</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>Barang A</td>
+          <td>10.000</td>
+        </tr>
+
+        <tr>
+          <td>002</td>
+          <td>Barang B</td>
+          <td>20.000</td>
+        </tr>
+
+        <tr>
+          <td>003</td>
+          <td>Barang C</td>
+          <td>30.000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>Inputan User</h1>
+    <table border="1">
+      <form id="checkoutForm">
+        <div>
+          <label for="kode">Masukkan Kode:</label>
+          <input type="text" id="kode" required />
+        </div>
+
+        <div>
+          <label for="jumlah">Banyaknya Barang:</label>
+          <input type="number" id="jumlah" required />
+        </div>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+      </form>
+    </table>
+
+    <script>
+      function barang() {
+        switch (kode) {
+          case "001":
+            return 10000;
+          case "002":
+            return 20000;
+          case "003":
+            return 30000;
+        }
+      }
+
+      function submitForm() {
+        const kodeBarang = document.getElementById("kode");
+        const jumlahBarang = document.getElementById("jumlah");
+
+        const kode = kodeBarang.value;
+        const jumlah = parseFloat(jumlahBarang.value) || 0;
+
+        const hargaBarang = barang(kode);
+        const totalPembayaran = hargaBarang * jumlah;
+
+        alert(`total pembayaran adalah: ${totalPembayaran.toLocaleString()}`);
+
+        const uangUser = parseFloat(prompt("masukkan uang user:"));
+
+        if (isNaN(uangUser) || uangUser < totalPembayaran) {
+          alert("uangnya kurang dari total pembayaran.");
+          return;
+        }
+
+        const uangKembalian = uangUser - totalPembayaran;
+        alert(`total kembalian anda adalah: ${uangKembalian.toLocaleString()}`);
+      }
+    </script>
+  </body>
+</html>
